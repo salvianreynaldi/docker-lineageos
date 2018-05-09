@@ -1,9 +1,9 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 ENV \
 # ccache specifics
     CCACHE_SIZE=50G \
-    CCACHE_DIR=/srv/ccache \
+    CCACHE_DIR=/home/build/ccache \
     USE_CCACHE=1 \
     CCACHE_COMPRESS=1 \
 # Extra include PATH, it may not include /usr/local/(s)bin on some systems
@@ -65,13 +65,13 @@ RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin
 # Add sudo permission
 RUN echo "build ALL=NOPASSWD: ALL" > /etc/sudoers.d/build
 
-RUN ccache -M $CCACHE_SIZE
+RUN ccache -M ${CCACHE_SIZE}
 
 # Fix ownership
 RUN chown -R root:root /home/build
 
 VOLUME /home/build/android
-VOLUME /srv/ccache
+VOLUME /home/build/ccache
 
 USER root
 WORKDIR /home/build/android
