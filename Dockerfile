@@ -6,6 +6,7 @@ ENV \
     CCACHE_DIR=/home/build/ccache \
     USE_CCACHE=1 \
     CCACHE_COMPRESS=1 \
+    USER=root \
 # Extra include PATH, it may not include /usr/local/(s)bin on some systems
     PATH=$PATH:/usr/local/bin/
 
