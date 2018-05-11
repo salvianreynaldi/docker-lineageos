@@ -58,7 +58,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     tmux \
     sudo \
     wget \
- && rm -rf /var/lib/apt/lists/*
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo \
  && chmod a+x /usr/local/bin/repo
