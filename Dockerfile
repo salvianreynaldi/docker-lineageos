@@ -13,7 +13,7 @@ ENV \
 RUN export DEBIAN_FRONTEND=noninteractive \
  && apt update \
  && apt dist-upgrade -y \
- && apt install -y \
+ && apt install -y --no-install-recommends \
 # Install build dependencies (source: https://wiki.lineageos.org/devices/sagit/build)
     bc \
     bison \
