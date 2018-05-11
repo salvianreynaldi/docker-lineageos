@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 ENV \
 # ccache specifics
-    CCACHE_SIZE=25G \
+    CCACHE_SIZE=50G \
     CCACHE_DIR=/root/ccache \
     USE_CCACHE=1 \
     CCACHE_COMPRESS=1 \
