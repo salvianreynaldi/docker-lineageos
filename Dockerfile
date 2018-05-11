@@ -2,8 +2,8 @@ FROM ubuntu:16.04
 
 ENV \
 # ccache specifics
-    CCACHE_SIZE=50G \
-    CCACHE_DIR=/home/build/ccache \
+    CCACHE_SIZE=25G \
+    CCACHE_DIR=/root/ccache \
     USE_CCACHE=1 \
     CCACHE_COMPRESS=1 \
     USER=root \
@@ -68,14 +68,8 @@ RUN echo "build ALL=NOPASSWD: ALL" > /etc/sudoers.d/build
 
 RUN ccache -M ${CCACHE_SIZE}
 
-# Fix ownership
-RUN chown -R root:root /home/build
-
-VOLUME /home/build/android
-VOLUME /home/build/ccache
-
 USER root
-WORKDIR /home/build/android
+WORKDIR /root
 
 ENTRYPOINT /bin/bash
 CMD ["-eo", "pipefail"]
