@@ -6,7 +6,6 @@ ENV \
     CCACHE_DIR=/root/ccache \
     USE_CCACHE=1 \
     CCACHE_COMPRESS=1 \
-    USER=root \
 # Extra include PATH, it may not include /usr/local/(s)bin on some systems
     PATH=$PATH:/usr/local/bin/
 
@@ -66,11 +65,6 @@ RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin
 
 # Add sudo permission
 RUN echo "build ALL=NOPASSWD: ALL" > /etc/sudoers.d/build
-
-RUN ccache -M ${CCACHE_SIZE}
-
-USER root
-WORKDIR /root
 
 ENTRYPOINT /bin/bash
 CMD ["-eo", "pipefail"]
