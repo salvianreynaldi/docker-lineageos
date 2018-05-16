@@ -46,6 +46,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     zip \
     zlib1g-dev \
     openjdk-8-jdk-headless \
+    unzip \
 # Install additional packages which are useful for building Android
     android-tools-adb \
     android-tools-fastboot \
