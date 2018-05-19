@@ -1,6 +1,7 @@
-FROM ubuntu:16.04
+FROM openjdk:8
+LABEL maintainer="salvianreynaldi@gmail.com"
 
-ENV \
+ENV USER=lineageos \
 # ccache specifics
     CCACHE_SIZE=50G \
     CCACHE_DIR=/root/ccache \
@@ -45,9 +46,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     xsltproc \
     zip \
     zlib1g-dev \
-    openjdk-8-jdk-headless \
     unzip \
 # Install additional packages which are useful for building Android
+    android-sdk-platform-tools-common \
     android-tools-adb \
     android-tools-fastboot \
     bash-completion \
@@ -61,11 +62,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
+RUN set -ex ;\
+    groupadd -r lineageos && useradd -r -g lineageos lineageos && usermod -u 1000 lineageos ;\
+    echo "lineageos ALL=NOPASSWD: ALL" >> /etc/sudoers.d/lineageos ;
 RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin/repo \
  && chmod a+x /usr/local/bin/repo
 
-# Add sudo permission
-RUN echo "build ALL=NOPASSWD: ALL" > /etc/sudoers.d/build
-
+USER $USER
+WORKDIR /home/$USER
 ENTRYPOINT /bin/bash
 CMD ["-eo", "pipefail"]
