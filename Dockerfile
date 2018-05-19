@@ -6,7 +6,7 @@ ENV USER=lineageos \
 # ccache specifics
 ENV CCACHE_SIZE=50G \
     CCACHE_DIR=$HOME_DIR/ccache \
-    USE_CCACHE=1
+    USE_CCACHE=1 \
 # Extra include PATH, it may not include /usr/local/(s)bin on some systems
     PATH=$PATH:/usr/local/bin/
 
@@ -59,6 +59,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     tmux \
     sudo \
     wget \
+    htop \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
