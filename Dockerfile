@@ -2,11 +2,11 @@ FROM openjdk:8
 LABEL maintainer="salvianreynaldi@gmail.com"
 
 ENV USER=lineageos \
+    HOME_DIR=/home/lineageos
 # ccache specifics
-    CCACHE_SIZE=50G \
-    CCACHE_DIR=/root/ccache \
-    USE_CCACHE=1 \
-    CCACHE_COMPRESS=1 \
+ENV CCACHE_SIZE=50G \
+    CCACHE_DIR=$HOME_DIR/ccache \
+    USE_CCACHE=1
 # Extra include PATH, it may not include /usr/local/(s)bin on some systems
     PATH=$PATH:/usr/local/bin/
 
@@ -69,6 +69,6 @@ RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin
  && chmod a+x /usr/local/bin/repo
 
 USER $USER
-WORKDIR /home/$USER
+WORKDIR $HOME_DIR
 ENTRYPOINT /bin/bash
 CMD ["-eo", "pipefail"]
